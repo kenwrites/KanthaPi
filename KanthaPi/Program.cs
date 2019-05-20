@@ -7,6 +7,7 @@ namespace KanthaPi
         static void Main()
         {
             bool KeepGoing = true;
+            int maxIterations = 12000;
 
             do
             {
@@ -28,13 +29,64 @@ namespace KanthaPi
                     break;
                 }
 
-                // Calculate Pi
-
                 if (InputIsValid)
                 {
-                    Console.WriteLine("Valid input");
 
-                }
+                    // Make accuracy limiter
+
+                    string accuracyString = "0.";
+                    for (int i = 0; i <= digits; i++)
+                    {
+                        accuracyString += "0";
+                    }
+                    accuracyString += "1";
+                    double accuracy = double.Parse(accuracyString);
+
+                    // Calculate Pi
+
+                    double answer = 3;
+                    double baseNum = 2;
+                    int counter = 0;
+
+                    for (int i = 1; Math.Abs(Math.PI - answer) > accuracy && i < maxIterations; i++)
+                    {
+                        if (i % 2 == 1) // odds
+                        {
+                            answer += (4 / (baseNum * (baseNum +1 ) * (baseNum + 2)));
+                            baseNum += 2;
+                            counter += 1;
+                            Console.WriteLine(i + ": " + answer);
+                        }
+                        else // evens
+                        {
+                            answer -= (4 / (baseNum * (baseNum + 1) * (baseNum + 2)));
+                            baseNum += 2;
+                            counter += 1;
+                            Console.WriteLine(i + ": " + answer);
+                        }
+
+                    } // end for
+
+                    // Write answer to screen
+
+                    if (counter == maxIterations - 1)
+                    {
+                        Console.WriteLine("Sorry!  This program only does " + maxIterations + " iterations.  You've hit that limit, " +
+                            "and we still don't have Pi to " + digits + " digits.");
+                    }
+                    else
+                    {
+                        char[] answerArray = answer.ToString().ToCharArray();
+                        string answerOutput = "";
+                        for (int i = 0; i < 2 + digits; i++)
+                        {
+                            answerOutput += answerArray[i];
+                        }
+                        Console.WriteLine("Pi to " + digits + " significant digits is " + answerOutput + ".");
+                        Console.WriteLine("It took " + counter + " steps to get that answer.");
+                    }                    
+
+                } // end InputIsValid
                 else
                 {
                     // Let user know about input issues
