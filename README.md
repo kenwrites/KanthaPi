@@ -5,5 +5,3 @@ A C# console app that calculates pi to a number of significant digits specified 
 Uses the Nilakantha series to calculate Pi.
 
 Project is from https://github.com/karan/Projects  
-
-@karan
