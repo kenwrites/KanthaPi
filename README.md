@@ -1,5 +1,7 @@
 # What is this?
 
-# What is here? 
+A C# console app that calculates pi to a number of significant digits specified by the user.  
 
-# Live URL
+Uses the Nilakantha series to calculate Pi.
+
+Project is from https://github.com/karan/Projects  
